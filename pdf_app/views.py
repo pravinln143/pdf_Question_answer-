@@ -59,9 +59,12 @@ def insufficient_quota(request):
 def rate_limit_exceeded(request):
     return render(request, "rate_limit_exceeded.html")
 
+import pymupdf
+
 def extract_text_from_pdf(file_path):
-    text = ""
-    with fitz.open(file_path) as pdf:
-        for page in pdf:
+    with pymupdf.open(file_path) as pdf_document:  # or pymupdf.Document(file_path)
+        text = ""
+        for page_num in range(pdf_document.page_count):
+            page = pdf_document[page_num]
             text += page.get_text()
     return text
