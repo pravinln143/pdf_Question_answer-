@@ -139,3 +139,10 @@ openai_api_key = os.getenv("OPENAI_API_KEY")
 import os
 
 PORT = os.getenv('PORT', 8000)
+# Add the trusted origins for CSRF validation
+CSRF_TRUSTED_ORIGINS = [
+    'https://pdf-question-answer-v4rw.onrender.com'
+]
+
+# Ensure CSRF cookie is secure (use this if you're running on HTTPS)
+CSRF_COOKIE_SECURE = True
