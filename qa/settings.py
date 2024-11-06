@@ -135,3 +135,7 @@ CHANNEL_LAYERS = {
 }
 import os
 openai_api_key = os.getenv("OPENAI_API_KEY")
+
+import os
+
+PORT = os.getenv('PORT', 8000)
