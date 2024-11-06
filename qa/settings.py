@@ -133,8 +133,9 @@ CHANNEL_LAYERS = {
         },
     },
 }
-import os
-openai_api_key = os.getenv("OPENAI_API_KEY")
+import openai
+
+openai.api_key = "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"
 
 import os
 
