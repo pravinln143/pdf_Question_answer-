@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Successful Upload</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        /* Styling the Upload Success Container */
+        #upload-container {
+            position: absolute;
+            z-index: 2;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            width: 80%;
+            max-width: 500px;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            line-height: 1.5;
+        }
+        input[type="text"] {
+            font-size: 1.2em;
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border-radius: 5px;
+            border: 2px solid #ddd;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.2em;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        /* Styling Answer Section */
+        .answer-section {
+            margin-top: 30px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <!-- 3D Animation Background using Three.js -->
+    <div id="upload-container">
+        <h1>File Uploaded Successfully</h1>
+
+        <h2>Ask a Question</h2>
+        <form action="{% url 'ask_question' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="question" placeholder="Ask a question..." required>
+            <button type="submit">Get Answer</button>
+        </form>
+
+        {% if answer %}
+            <div class="answer-section">
+                <h3>Answer:</h3>
+                <p>{{ answer }}</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- 3D Animation Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Set up the 3D scene
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Create a rotating cube to use as the background element
+        const geometry = new THREE.BoxGeometry();
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        camera.position.z = 5;
+
+        // Rotate the cube for animation
+        function animate() {
+            requestAnimationFrame(animate);
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Resize the canvas when window is resized
+        window.addEventListener('resize', function() {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        });
+    </script>
+
+    <!-- Smooth animations for the form elements using GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.1/gsap.min.js"></script>
+    <script>
+        gsap.from("#upload-container", { opacity: 0, y: -100, duration: 2, ease: "power3.out" });
+        gsap.from("h1", { opacity: 0, duration: 1, delay: 0.5, x: -100 });
+        gsap.from("button", { opacity: 0, duration: 1, delay: 1, x: 100 });
+    </script>
+</body>
+</html>
