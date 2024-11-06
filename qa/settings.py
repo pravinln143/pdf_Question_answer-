@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-*7i$_#nf1v!w9#d^p87l4-0+%^5+6=c$^r=ot&a+f&9j&pd$3e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["pdf-question-answer-v4rw.onrender.com"]
 
 
 # Application definition
