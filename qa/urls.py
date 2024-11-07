@@ -9,6 +9,7 @@ urlpatterns = [
     path("successful_upload/", views.successful_upload, name="successful_upload"),
     path("ask_question/", views.ask_question, name="ask_question"),
     path("insufficient_quota/", views.insufficient_quota, name="insufficient_quota"),
-    path("rate_limit_exceeded/", views.rate_limit_exceeded, name="rate_limit_exceeded"),]
+    path("rate_limit_exceeded/", views.rate_limit_exceeded, name="rate_limit_exceeded"),
+]
 
 

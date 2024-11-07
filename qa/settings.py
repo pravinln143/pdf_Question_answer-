@@ -133,9 +133,9 @@ CHANNEL_LAYERS = {
         },
     },
 }
-import openai
+# settings.py
 
-openai.api_key = "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"
+OPENAI_API_KEY = "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"
 
 import os
 
