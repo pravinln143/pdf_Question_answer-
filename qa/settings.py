@@ -135,7 +135,7 @@ CHANNEL_LAYERS = {
 }
 import openai
 
-openai.api_key = "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"
+openai.api_key = "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"
 
 import os
 
